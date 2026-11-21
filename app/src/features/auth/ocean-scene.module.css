@@ -1,0 +1,411 @@
+/* Isolated login-only styles: no edits to globals.css or dashboard styles. */
+.page:global(.login-scene) {
+  --ocean-horizon: 58%;
+  --sun-left: 21%;
+  min-height: 100svh;
+  padding: 100px 24px 110px;
+  isolation: isolate;
+  background: #e8e3d6;
+}
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  contain: layout paint;
+}
+.sky {
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--ocean-horizon);
+  overflow: hidden;
+  background: linear-gradient(180deg, #f2eee5 0%, #dedbce 54%, #e9d3ae 100%);
+}
+.haze {
+  position: absolute;
+  width: 140%;
+  height: 32%;
+  bottom: -5%;
+  left: -20%;
+  background: radial-gradient(ellipse at 32% 100%, #f9e9be99, transparent 65%);
+}
+.sunDisc {
+  position: absolute;
+  width: 110px;
+  aspect-ratio: 1;
+  left: var(--sun-left);
+  bottom: -48px;
+  border-radius: 50%;
+  background: #ffe6aa;
+  box-shadow:
+    0 0 45px 16px #ffe7b233,
+    0 0 100px 35px #fff2d01c;
+  transform: translate3d(0, -34px, 0);
+  animation: sunrise 22s cubic-bezier(0.17, 0.58, 0.34, 1) both;
+}
+.water {
+  position: absolute;
+  inset: var(--ocean-horizon) 0 0;
+  background: linear-gradient(180deg, #7ca6a0 0%, #4b7d7c 29%, #295a63 70%, #193f4a 100%);
+}
+.horizonLine {
+  position: absolute;
+  top: var(--ocean-horizon);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #f5e6b9aa 25%, #e0e5c94d 60%, transparent);
+}
+.reflection {
+  position: absolute;
+  top: calc(var(--ocean-horizon) + 1px);
+  left: calc(var(--sun-left) - 10px);
+  width: 130px;
+  height: 170px;
+  background: linear-gradient(180deg, #f7dfaa60, #e8d6a61c 55%, transparent);
+  clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%);
+  opacity: 0.6;
+}
+.farWave,
+.middleWave,
+.frontWave {
+  display: block;
+  position: absolute;
+  width: 200%;
+  max-width: none;
+  left: 0;
+  animation: driftWave 24s linear infinite;
+  backface-visibility: hidden;
+}
+.farWave {
+  top: calc(var(--ocean-horizon) - 22px);
+  height: 76px;
+  fill: #79a59d;
+  opacity: 0.62;
+  animation-duration: 29s;
+}
+.middleWave {
+  top: calc(var(--ocean-horizon) + 26px);
+  height: 98px;
+  fill: #538782;
+  opacity: 0.65;
+  animation-duration: 21s;
+  animation-direction: reverse;
+}
+.frontWave {
+  bottom: -46px;
+  height: 150px;
+  fill: #153c49;
+  opacity: 0.55;
+  animation-duration: 17s;
+}
+.boatDrift {
+  position: absolute;
+  top: calc(var(--ocean-horizon) - 81px);
+  left: 8%;
+  width: clamp(190px, 19vw, 265px);
+  animation: boatTravel 32s ease-in-out infinite;
+}
+.trawler {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 52% 82%;
+  animation: boatRock 5.6s ease-in-out infinite;
+}
+.fishGroup {
+  position: absolute;
+  top: calc(var(--ocean-horizon) + 90px);
+  width: 38px;
+  height: 24px;
+  --fish-delay: 0s;
+}
+.fishOne {
+  left: 68%;
+}
+.fishTwo {
+  left: 83%;
+  --fish-delay: -4s;
+}
+.fishThree {
+  left: 37%;
+  --fish-delay: -8s;
+}
+.fish {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation: fishJump 12s linear infinite;
+  animation-delay: var(--fish-delay);
+  transform-origin: 65% 50%;
+}
+.splashStart,
+.splashEnd {
+  position: absolute;
+  top: 14px;
+  left: -7px;
+  width: 24px;
+  height: 5px;
+  border: 1px solid #dbe9dc;
+  border-radius: 50%;
+  opacity: 0;
+  animation: splashStart 12s linear infinite;
+  animation-delay: var(--fish-delay);
+}
+.splashEnd {
+  left: 107px;
+  animation-name: splashEnd;
+}
+.waterGrain {
+  position: absolute;
+  inset: calc(var(--ocean-horizon) + 5px) 0 0;
+  background: repeating-linear-gradient(0deg, transparent 0 26px, #d7e8da06 27px 28px);
+  opacity: 0.65;
+}
+/* Preserve the same fields and buttons, with a calmer sand-and-coal panel. */
+.page :global(.login-panel) {
+  z-index: 2;
+  width: 385px;
+  max-width: 100%;
+  padding: 29px 31px;
+  background: #f9f7eff0;
+  border: 1px solid #ffffff99;
+  border-radius: 22px;
+  box-shadow: 0 18px 65px #243d3b21;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.page :global(.login-top) {
+  z-index: 3;
+}
+.page :global(.login-top .brand) {
+  color: #304743;
+}
+.page :global(.login-emblem) {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 17px;
+  border-radius: 13px;
+  background: #354b45;
+  color: #eee9db;
+}
+.page :global(.login-panel h1) {
+  font-size: 24px;
+  margin: 12px 0 8px;
+  color: #293d38;
+}
+.page :global(.login-panel > p) {
+  margin-bottom: 19px;
+  color: #7b867a;
+}
+.page :global(.pin-input) {
+  min-height: 54px;
+  border-color: #d1d5c6;
+}
+.page :global(.login-panel form .button) {
+  margin-top: 16px;
+  background: #30443b;
+}
+.page :global(.login-divider) {
+  margin: 19px 0 16px;
+  color: #969d8c;
+}
+.page :global(.login-foot) {
+  margin-top: 18px;
+  line-height: 1.6;
+  color: #919b88;
+}
+.page :global(.login-bottom) {
+  color: #d7e3d7;
+  text-shadow: 0 1px 4px #173e45;
+}
+
+@keyframes sunrise {
+  from {
+    transform: translate3d(0, 72px, 0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translate3d(0, -34px, 0);
+    opacity: 1;
+  }
+}
+@keyframes driftWave {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes boatTravel {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(36px, 0, 0);
+  }
+}
+@keyframes boatRock {
+  0%,
+  100% {
+    transform: translate3d(0, 1px, 0) rotate(-1.4deg);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0) rotate(1.3deg);
+  }
+}
+@keyframes fishJump {
+  0%,
+  26%,
+  100% {
+    opacity: 0;
+    transform: translate3d(-18px, 16px, 0) rotate(-35deg);
+  }
+  2% {
+    opacity: 0.9;
+    transform: translate3d(-10px, 7px, 0) rotate(-35deg);
+  }
+  9% {
+    opacity: 1;
+    transform: translate3d(24px, -44px, 0) rotate(-18deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translate3d(60px, -53px, 0) rotate(8deg);
+  }
+  23% {
+    opacity: 0.85;
+    transform: translate3d(108px, 10px, 0) rotate(42deg);
+  }
+  25% {
+    opacity: 0;
+    transform: translate3d(118px, 20px, 0) rotate(48deg);
+  }
+}
+@keyframes splashStart {
+  0%,
+  9%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  2% {
+    opacity: 0.65;
+    transform: scale(0.65);
+  }
+  7% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@keyframes splashEnd {
+  0%,
+  22%,
+  33%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  25% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+  31% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+@media (max-width: 760px) {
+  .page:global(.login-scene) {
+    --ocean-horizon: calc(100% - 155px);
+    --sun-left: 72%;
+    padding: 93px 18px 213px;
+    align-items: flex-start;
+  }
+  .page :global(.login-panel) {
+    width: 365px;
+    padding: 25px 27px;
+  }
+  .page :global(.login-top) {
+    top: 23px;
+    left: 23px;
+    right: 23px;
+  }
+  .page :global(.login-top .brand) {
+    font-size: 23px;
+  }
+  .sunDisc {
+    width: 84px;
+    bottom: -37px;
+  }
+  .reflection {
+    width: 95px;
+    height: 100px;
+  }
+  .boatDrift {
+    left: 5%;
+    top: calc(var(--ocean-horizon) - 72px);
+    width: 178px;
+  }
+  .fishGroup {
+    width: 29px;
+    top: calc(var(--ocean-horizon) + 58px);
+  }
+  .fishOne {
+    left: 46%;
+  }
+  .fishTwo {
+    left: 67%;
+  }
+  .fishThree {
+    left: 9%;
+  }
+  .middleWave {
+    height: 75px;
+  }
+  .frontWave {
+    height: 105px;
+    bottom: -27px;
+  }
+  .page :global(.login-bottom) {
+    bottom: 20px;
+    font-size: 9px;
+  }
+}
+@media (max-width: 380px) {
+  .page :global(.login-panel) {
+    padding: 23px 21px;
+  }
+  .page :global(.login-panel h1) {
+    font-size: 22px;
+  }
+  .page:global(.login-scene) {
+    padding-top: 86px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sunDisc,
+  .farWave,
+  .middleWave,
+  .frontWave,
+  .boatDrift,
+  .trawler,
+  .fish,
+  .splashStart,
+  .splashEnd {
+    animation: none !important;
+  }
+  .fishGroup {
+    display: none;
+  }
+  .sunDisc {
+    transform: translate3d(0, -34px, 0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,10 @@
+USE BoatCore;
+EXEC dbo.GetCrewPendingSalaries;
+EXEC dbo.GetDuesPayables @Tab='buyer';
+EXEC dbo.GetDuesPayables @Tab='supplier';
+-- DECLARE @CrewId uniqueidentifier='REPLACE_WITH_CREW_ID';
+-- EXEC dbo.GetCrewStatement @CrewId=@CrewId;
+SELECT * FROM dbo.CrewSalaryPayments ORDER BY PaymentDate DESC;
+SELECT * FROM dbo.WageBatches ORDER BY WorkDate DESC;
+SELECT * FROM dbo.BuyerReceipts ORDER BY ReceiptDate DESC;
+SELECT * FROM dbo.ExpensePayments ORDER BY PaymentDate DESC;

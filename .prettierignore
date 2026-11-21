@@ -1,0 +1,7 @@
+node_modules
+.next
+package-lock.json
+api/data
+api/uploads
+playwright-report
+test-results

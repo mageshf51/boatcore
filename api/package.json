@@ -1,0 +1,26 @@
+{
+  "name": "@boatcore/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --import tsx --env-file-if-exists=.env --watch src/server.ts",
+    "build": "tsc --noEmit",
+    "start": "node --import tsx --env-file-if-exists=.env src/server.ts",
+    "db:setup": "node --import tsx --env-file-if-exists=.env src/scripts/setup-database.ts",
+    "seed": "node --import tsx --env-file-if-exists=.env src/scripts/seed-database.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "mssql": "^12.0.0",
+    "multer": "^2.0.2",
+    "cookie-parser": "^1.4.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/multer": "^2.0.0",
+    "@types/mssql": "^9.1.0",
+    "@types/node": "^22.0.0"
+  }
+}
